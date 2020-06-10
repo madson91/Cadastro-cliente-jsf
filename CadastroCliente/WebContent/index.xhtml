@@ -10,10 +10,12 @@
 			<legend>Dados do cliente</legend>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Nome: " for="Nome" />
-				<h:inputText label="nome" />
+				<h:inputText label="nome" value="#{cadastroClienteBean.cliente.nome}"/>
 				<h:outputLabel value="Email: " for="Email" />
-				<h:inputText label="email" />
-				<h:commandButton value="Gravar" action=""/>
+				<h:inputText label="email" value="#{cadastroClienteBean.cliente.email}"/>
+				<h:outputLabel value="Data: " for="Data cadastro" />
+				<h:inputText label="DataCad" />
+				<h:commandButton value="Gravar" action="#{cadastroClienteBean.addCliente}"/>
 			</h:panelGrid>
 		</fieldset>
 	</h:form>
