@@ -5,20 +5,53 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:body>
 	<h1>Cadastro de Cliente</h1>
+	<h:messages />
 	<h:form>
 		<fieldset>
 			<legend>Dados do cliente</legend>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Nome: " for="Nome" />
-				<h:inputText label="nome" value="#{cadastroClienteBean.cliente.nome}"/>
+				<h:inputText label="nome" required="true"
+					requiredMessage="nome obrigatorio"
+					value="#{cadastroClienteBean.cliente.nome}" />
 				<h:outputLabel value="Email: " for="Email" />
-				<h:inputText label="email" value="#{cadastroClienteBean.cliente.email}"/>
+				<h:inputText label="email"
+					value="#{cadastroClienteBean.cliente.email}" />
 				<h:outputLabel value="Data: " for="Data cadastro" />
-				<h:inputText label="DataCad" />
-				<h:commandButton value="Gravar" action="#{cadastroClienteBean.addCliente}"/>
+				<h:inputText label="DataCad"
+					value="#{cadastroClienteBean.cliente.dataCadastro}">
+					<f:convertDateTime pattern="dd/mm/yyyy" timeZone="GMT-3" />
+				</h:inputText>
+				<h:commandButton value="Gravar"
+					action="#{cadastroClienteBean.addCliente}" />
 			</h:panelGrid>
 		</fieldset>
 	</h:form>
+	<fieldset>
+
+		<h:dataTable value="#{cadastroClienteBean.getClientes()}"
+			var="cliente">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				<h:outputText value=" #{cliente.id}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nomed</f:facet>
+				<h:outputText value=" #{cliente.nome}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Email</f:facet>
+				<h:outputText value=" #{cliente.email}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Data Cadastro</f:facet>
+				<h:outputText value=" #{cliente.dataCadastro}">
+				</h:outputText>
+			</h:column>
+
+		</h:dataTable>
+	</fieldset>
+
 </h:body>
 
 </html>

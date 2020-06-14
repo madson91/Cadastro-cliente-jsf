@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Pessoa {
@@ -14,6 +16,7 @@ public class Pessoa {
 	private int id;
 	private String nome;
 	private String email;
+	@Temporal(TemporalType.DATE)
 	private Date dataCadastro;
 	private boolean cliente;
 	
