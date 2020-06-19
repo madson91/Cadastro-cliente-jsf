@@ -25,7 +25,6 @@ public class CadastroClienteBean {
 
 		PessoaDao dao = new PessoaDao();
 		cliente.setCliente(true);
-		//		cliente.setDataCadastro(new Date());
 		dao.adiciona(this.cliente);
 		this.cliente = new Pessoa();
 		FacesContext.getCurrentInstance().addMessage("sucesso", new FacesMessage("Cliente cadastrado com sucesso!") );
