@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -7,14 +8,15 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head />
 
-
 <ui:composition template="_template.xhtml">
 	<ui:define name="titulo">Cadastro de Cliente</ui:define>
+
 	<ui:define name="conteudo">
 		<h:form>
 
 			<p:messages id="mensages" />
 			<p:fieldset legend="Dados do cliente">
+				<!--  <p:message for="email" id="messageEmail" />-->
 				<p:panelGrid columns="2">
 					<h:outputLabel value="Nome: " for="Nome" />
 					<p:inputText label="nome" required="true"
@@ -22,43 +24,51 @@
 						value="#{cadastroClienteBean.cliente.nome}">
 					</p:inputText>
 					<h:outputLabel value="Email: " for="Email" />
-					<p:inputText label="email" required="true"
+					<p:inputText label="email" required="true" id="email"
 						requiredMessage="email obrigatorio"
 						validatorMessage="Informe um email valido"
 						value="#{cadastroClienteBean.cliente.email}">
 						<f:validateRegex
 							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+						<f:ajax event="blur" render="mensages" />
 					</p:inputText>
+
 					<h:outputLabel value="Data: " for="Data cadastro" />
 					<p:calendar id="button" requiredMessage="Data obrigatoria!"
 						value="#{cadastroClienteBean.cliente.dataCadastro}"
-						required="true" reshowOn="button" />
-					<p:commandButton value="Gravar" process="@form" update="@form :tabela"
-						action="#{cadastroClienteBean.addCliente}">
-					</p:commandButton>
+						required="true" reshowOn="button" pattern="dd/MM/yyyy" mask="true">
+
+					</p:calendar>
+
 				</p:panelGrid>
+				<p:commandButton value="Gravar" process="@form" update="@all"
+					action="#{cadastroClienteBean.addCliente}">
+				</p:commandButton>
 			</p:fieldset>
 		</h:form>
+		<p:commandButton value="Edit" icon="fa fa-fw fa-edit" type="button" />
+		<p:commandButton value="Remove" icon="fa fa-fw fa-remove"
+			type="button" />
+		<p:commandButton value="Download" icon="fa fa-fw fa-download"
+			type="button" />
+
 		<h3>Lista</h3>
-		
+
 		<fieldset>
 
 			<p:dataTable value="#{cadastroClienteBean.getClientes()}" id="tabela"
 				var="cliente">
-				<p:column>
-					<f:facet name="header">Id</f:facet>
+					<f:facet name="header">Clientes</f:facet>
+				<p:column headerText="Codigo" sortBy="#{cliente.id}">
 					<h:outputText value=" #{cliente.id}"></h:outputText>
 				</p:column>
-				<p:column>
-					<f:facet name="header">Nome</f:facet>
+				<p:column headerText="Nome">
 					<h:outputText value=" #{cliente.nome}"></h:outputText>
 				</p:column>
-				<p:column>
-					<f:facet name="header">Email</f:facet>
+				<p:column headerText="Email">
 					<h:outputText value=" #{cliente.email}"></h:outputText>
 				</p:column>
-				<p:column>
-					<f:facet name="header">Data Cadastro</f:facet>
+				<p:column headerText="Data nascimento">
 					<h:outputText value=" #{cliente.dataCadastro}">
 						<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
 					</h:outputText>

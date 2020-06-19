@@ -1,13 +1,10 @@
 package br.com.projeto.cadastrocliente.bean;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 
 import br.com.projeto.cadastrocliente.dao.PessoaDao;
 import br.com.projeto.cadastrocliente.modelo.Pessoa;
@@ -16,6 +13,7 @@ import br.com.projeto.cadastrocliente.modelo.Pessoa;
 public class CadastroClienteBean {
 
 	private Pessoa cliente = new Pessoa();
+	private List<Pessoa> lista;
 
 	public Pessoa getCliente() {
 		return this.cliente;
@@ -32,22 +30,11 @@ public class CadastroClienteBean {
 	}
 
 	public List<Pessoa> getClientes() {
+
 		PessoaDao dao = new PessoaDao();
-		return dao.listaTodos();
-
-	}
-
-	public void validadorEmail() throws ValidatorException {
-
-		if (this.cliente.getEmail() != null && this.cliente.getEmail().length() > 0) {
-			String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-			Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-			Matcher matcher = pattern.matcher(cliente.getEmail());
-			if (matcher.matches()) {
-				//email incorreto
-				throw new ValidatorException(new FacesMessage("Email incorreto!"));
-			}
-		}
+		if(lista == null)
+			lista =  dao.listaTodos();
+		return lista;
 
 	}
 
