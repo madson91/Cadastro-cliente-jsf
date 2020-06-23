@@ -11,7 +11,17 @@
 <h:head></h:head>
 <h:body>
 	<div id="cabecalho">
-		<p:graphicImage library="img" name="Java.png" />
+		<p:graphicImage library="img" name="Java.png" height="200" width="80%" />
+		<p:growl id="messages" showDetail="true" autoUpdate="true" />
+		<h:form>
+			<p:menuButton value="Menu">
+				<p:menuitem value="Save" action="teste" update="messages" icon="pi pi-save" />
+				<p:menuitem value="Update" update="messages" icon="pi pi-refresh" />
+				<p:menuitem value="Delete" icon="pi pi-times" />
+				<p:separator />
+				<p:menuitem value="Homepage" icon="pi pi-home" action="teste"/>
+			</p:menuButton>
+		</h:form>
 		<h1>
 			<ui:insert name="titulo"></ui:insert>
 		</h1>

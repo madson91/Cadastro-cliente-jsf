@@ -11,6 +11,9 @@ import javax.persistence.TemporalType;
 @Entity
 public class Pessoa {
 
+	/**
+	 * 
+	 */
 	@Id
 	@GeneratedValue
 	private int id;

@@ -1,15 +1,18 @@
 package br.com.projeto.cadastrocliente.bean;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.projeto.cadastrocliente.dao.PessoaDao;
 import br.com.projeto.cadastrocliente.modelo.Pessoa;
 
 @ManagedBean(name = "cadastroClienteBean")
+@ViewScoped
 public class CadastroClienteBean {
 
 	private Pessoa cliente = new Pessoa();
@@ -34,9 +37,10 @@ public class CadastroClienteBean {
 		PessoaDao dao = new PessoaDao();
 		if(lista == null)
 			lista =  dao.listaTodos();
-		return lista;
+		return this.lista;
 
 	}
+	
 
 }
 
